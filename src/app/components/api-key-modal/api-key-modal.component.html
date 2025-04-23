@@ -1,0 +1,60 @@
+<div class="modal-overlay" *ngIf="isVisible" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>OpenAI API Key</h2>
+      <button class="close-button" (click)="closeModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="modal-content">
+      <p class="api-description">
+        To use Lingtor with OpenAI's advanced AI models, you need to provide your own API key.
+        Your key will be stored securely in your browser.
+      </p>
+      
+      <div *ngIf="hasExistingKey" class="existing-key-info">
+        <p>You already have an API key saved: <span class="masked-key">{{ maskedApiKey }}</span></p>
+        <button class="remove-button" (click)="removeApiKey()">Remove API Key</button>
+      </div>
+      
+      <div *ngIf="!hasExistingKey || apiKey">
+        <div class="input-group">
+          <label for="api-key">OpenAI API Key</label>
+          <input 
+            type="password" 
+            id="api-key" 
+            [(ngModel)]="apiKey" 
+            placeholder="sk-..." 
+            [disabled]="isLoading"
+          />
+          <small class="hint">Your API key will only be stored locally in your browser.</small>
+        </div>
+        
+        <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+        <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+        
+        <div class="button-group">
+          <button class="cancel-button" (click)="closeModal()" [disabled]="isLoading">Cancel</button>
+          <button class="save-button" (click)="saveApiKey()" [disabled]="isLoading">
+            <span *ngIf="!isLoading">Save API Key</span>
+            <span *ngIf="isLoading" class="loading-spinner"></span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="api-instructions">
+        <h3>How to get an OpenAI API key:</h3>
+        <ol>
+          <li>Go to <a href="https://platform.openai.com/account/api-keys" target="_blank">platform.openai.com/account/api-keys</a></li>
+          <li>Sign in or create an account</li>
+          <li>Create a new secret key</li>
+          <li>Copy and paste it here</li>
+        </ol>
+        <p class="note">Note: OpenAI API usage is not free and will be billed to your OpenAI account.</p>
+      </div>
+    </div>
+  </div>
+</div>

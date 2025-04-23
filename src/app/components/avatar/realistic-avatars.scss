@@ -1,0 +1,443 @@
+// Realistic photo-like avatar styles
+// This uses advanced CSS to create photorealistic avatars without actual photos
+
+// Base mixins for facial features
+@mixin face($skin-tone) {
+  position: relative;
+  border-radius: 50%;
+  background: $skin-tone;
+  box-shadow: 
+    inset 0 -3px 10px rgba(0, 0, 0, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+@mixin eyes($eye-color, $type) {
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    width: 14%;
+    height: 16%;
+    top: 40%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(0, 0, 0, 0.3);
+  }
+  
+  &::before {
+    left: 33%;
+    transform: translateX(-50%);
+  }
+  
+  &::after {
+    right: 33%;
+    transform: translateX(50%);
+  }
+  
+  .eye-pupil {
+    position: absolute;
+    width: 6%;
+    height: 6%;
+    background: $eye-color;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    
+    &.left {
+      top: 43%;
+      left: 33%;
+      transform: translateX(-50%);
+    }
+    
+    &.right {
+      top: 43%;
+      right: 33%;
+      transform: translateX(50%);
+    }
+  }
+  
+  @if $type == 'narrow' {
+    &::before, &::after {
+      height: 10%;
+    }
+  } @else if $type == 'wide' {
+    &::before, &::after {
+      width: 16%;
+      height: 18%;
+    }
+  }
+}
+
+@mixin mouth($type) {
+  .mouth {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24%;
+    height: 5%;
+    bottom: 28%;
+    border-radius: 50%;
+    background: transparent;
+    
+    @if $type == 'smile' {
+      border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+      height: 2%;
+    } @else if $type == 'neutral' {
+      border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+      width: 16%;
+      height: 0;
+    } @else if $type == 'serious' {
+      border-top: 2px solid rgba(0, 0, 0, 0.5);
+      height: 2%;
+    }
+  }
+}
+
+@mixin hair($hair-color, $style) {
+  @if $style == 'short' {
+    &::before {
+      content: '';
+      position: absolute;
+      background: $hair-color;
+      width: 100%;
+      height: 40%;
+      top: -5%;
+      left: 0;
+      border-radius: 50% 50% 0 0;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+    }
+  } @else if $style == 'long' {
+    &::before {
+      content: '';
+      position: absolute;
+      background: $hair-color;
+      width: 110%;
+      height: 55%;
+      top: -10%;
+      left: -5%;
+      border-radius: 50% 50% 40% 40%;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      background: $hair-color;
+      width: 15%;
+      height: 50%;
+      bottom: 15%;
+      left: 10%;
+      border-radius: 30% 0 0 30%;
+      transform: rotate(15deg);
+    }
+  } @else if $style == 'bald' {
+    &::before {
+      content: '';
+      position: absolute;
+      background: $hair-color;
+      opacity: 0.7;
+      width: 100%;
+      height: 15%;
+      top: 0;
+      left: 0;
+      border-radius: 50% 50% 0 0;
+    }
+  } @else if $style == 'curly' {
+    &::before {
+      content: '';
+      position: absolute;
+      background: $hair-color;
+      width: 110%;
+      height: 45%;
+      top: -10%;
+      left: -5%;
+      border-radius: 40% 40% 30% 30%;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+@mixin accessories($type) {
+  @if $type == 'glasses' {
+    .glasses {
+      position: absolute;
+      width: 70%;
+      height: 18%;
+      top: 39%;
+      left: 15%;
+      border: 2px solid rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      pointer-events: none;
+      
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        width: 40%;
+        height: 100%;
+        border: 2px solid rgba(0, 0, 0, 0.7);
+        border-radius: 50%;
+        top: -2px;
+      }
+      
+      &::before {
+        left: 0;
+      }
+      
+      &::after {
+        right: 0;
+      }
+    }
+  } @else if $type == 'beard' {
+    .beard {
+      position: absolute;
+      width: 60%;
+      height: 30%;
+      bottom: 10%;
+      left: 20%;
+      background: #5E4B3B;
+      border-radius: 40% 40% 50% 50%;
+      box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+    }
+  } @else if $type == 'tie' {
+    .tie {
+      position: absolute;
+      width: 15%;
+      height: 20%;
+      bottom: 0;
+      left: 42.5%;
+      background: #E74C3C;
+      clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%);
+    }
+  }
+}
+
+// User Avatar
+.avatar-photo-user {
+  @include face(#FFD3C5);
+  @include eyes(#5B4B49, 'normal');
+  @include hair(#6E4C3D, 'short');
+  @include mouth('smile');
+  
+  .eye-pupil {
+    background: #614C45;
+  }
+}
+
+// Restaurant - Waiter
+.avatar-photo-restaurant {
+  @include face(#F5D0A9);
+  @include eyes(#634832, 'normal');
+  @include hair(#000000, 'short');
+  @include mouth('smile');
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 15%;
+    bottom: 0;
+    left: 15%;
+    background: #FFFFFF;
+    border-radius: 50% 50% 0 0;
+  }
+}
+
+// Hotel - Receptionist
+.avatar-photo-hotel {
+  @include face(#FFDFC4);
+  @include eyes(#5A81A8, 'normal');
+  @include hair(#D2B48C, 'long');
+  @include mouth('smile');
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 40%;
+    height: 3%;
+    bottom: 12%;
+    left: 30%;
+    background: #B5366D;
+    border-radius: 10px;
+  }
+}
+
+// Interview - Interviewer
+.avatar-photo-interview {
+  @include face(#E6C9AB);
+  @include eyes(#425E79, 'narrow');
+  @include hair(#5E4B3B, 'short');
+  @include mouth('neutral');
+  @include accessories('glasses');
+}
+
+// Doctor
+.avatar-photo-doctor {
+  @include face(#EADBCC);
+  @include eyes(#5B6670, 'normal');
+  @include hair(#CCCCCC, 'short');
+  @include mouth('neutral');
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 15%;
+    bottom: 0;
+    left: 25%;
+    background: #FFFFFF;
+    border-radius: 5px 5px 0 0;
+  }
+}
+
+// Shopping - Shop Assistant
+.avatar-photo-shopping {
+  @include face(#F3D8C0);
+  @include eyes(#7EB2DD, 'wide');
+  @include hair(#CD7F32, 'long');
+  @include mouth('smile');
+}
+
+// Business - Business Partner
+.avatar-photo-business {
+  @include face(#E0CDBB);
+  @include eyes(#556B75, 'narrow');
+  @include hair(#2B2A29, 'short');
+  @include mouth('neutral');
+  @include accessories('tie');
+}
+
+// Academic - Professor
+.avatar-photo-academic {
+  @include face(#EBD6C4);
+  @include eyes(#556B75, 'narrow');
+  @include hair(#D3D3D3, 'short');
+  @include mouth('neutral');
+  @include accessories('glasses');
+}
+
+// Default assistant
+.avatar-photo-assistant {
+  @include face(#F3D8C0);
+  @include eyes(#5B4B49, 'normal');
+  @include hair(#8B4513, 'short');
+  @include mouth('smile');
+}
+
+// Technology - IT Specialist
+.avatar-photo-technology {
+  @include face(#E6D5C3);
+  @include eyes(#425E79, 'narrow');
+  @include hair(#111111, 'short');
+  @include mouth('neutral');
+  @include accessories('glasses');
+}
+
+// Directions - Local Guide
+.avatar-photo-directions {
+  @include face(#F3CD9E);
+  @include eyes(#5B4B49, 'normal');
+  @include hair(#A67E5A, 'short');
+  @include mouth('smile');
+}
+
+// Emergency - Emergency Operator
+.avatar-photo-emergency {
+  @include face(#EBD6C4);
+  @include eyes(#5B4B49, 'normal');
+  @include hair(#964B00, 'short');
+  @include mouth('serious');
+}
+
+// Small talk - Friendly Neighbor
+.avatar-photo-smalltalk {
+  @include face(#F5D0A9);
+  @include eyes(#7EB2DD, 'wide');
+  @include hair(#C29766, 'curly');
+  @include mouth('smile');
+}
+
+// Transportation - Transport Worker
+.avatar-photo-transportation {
+  @include face(#E0CDBB);
+  @include eyes(#5B4B49, 'normal');
+  @include hair(#4E4E4E, 'short');
+  @include mouth('neutral');
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 15%;
+    top: 10%;
+    left: 25%;
+    background: #2D5391;
+    border-radius: 5px;
+  }
+}
+
+// Weather - Meteorologist
+.avatar-photo-weather {
+  @include face(#EBD6C4);
+  @include eyes(#556B75, 'normal');
+  @include hair(#964B00, 'long');
+  @include mouth('neutral');
+}
+
+// Dating - Date Partner
+.avatar-photo-dating {
+  @include face(#F3D8C0);
+  @include eyes(#556B75, 'wide');
+  @include hair(#CD7F32, 'long');
+  @include mouth('smile');
+}
+
+// Banking - Bank Teller
+.avatar-photo-banking {
+  @include face(#EBD6C4);
+  @include eyes(#425E79, 'normal');
+  @include hair(#000000, 'short');
+  @include mouth('smile');
+  @include accessories('tie');
+}
+
+// Leisure - Friend
+.avatar-photo-leisure {
+  @include face(#F5D0A9);
+  @include eyes(#7EB2DD, 'wide');
+  @include hair(#A67E5A, 'short');
+  @include mouth('smile');
+}
+
+// Informal - Friend
+.avatar-photo-informal {
+  @include face(#F3CD9E);
+  @include eyes(#5B4B49, 'normal');
+  @include hair(#CD7F32, 'curly');
+  @include mouth('smile');
+}
+
+// Style variants for different sizes
+.avatar-photo-size-small {
+  width: 32px;
+  height: 32px;
+  
+  .mouth, .glasses, .tie, .beard {
+    transform: scale(0.8);
+  }
+}
+
+.avatar-photo-size-medium {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar-photo-size-large {
+  width: 48px;
+  height: 48px;
+  
+  .mouth, .glasses, .tie, .beard {
+    transform: scale(1.2);
+  }
+}

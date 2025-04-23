@@ -1,0 +1,47 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="logo">
+      <h1 class="logo-text">Ling<span class="accent">tor</span></h1>
+    </div>
+    
+    <div class="navbar-controls">
+      <!-- New Dialogue Button (Opens Settings Modal) -->
+      <button class="start-dialogue-btn" (click)="openDialogueSettingsModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>New Dialogue</span>
+      </button>
+      
+
+      <!-- API Key Button -->
+      <button 
+        class="api-key-button" 
+        (click)="openApiKeyModal()" 
+        [class.api-key-set]="hasApiKey"
+        [attr.title]="hasApiKey ? 'OpenAI API Key is set' : 'Set OpenAI API Key'"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 7.5V7C15 4.79086 13.2091 3 11 3C8.79086 3 7 4.79086 7 7V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M5 7.5H19L18.5 21H5.5L5 7.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="14" r="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M12 16V18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span>{{ hasApiKey ? 'API Key' : 'Add API Key' }}</span>
+      </button>
+    </div>
+  </div>
+  <div class="navbar-divider"></div>
+</nav>
+
+<!-- API Key Modal -->
+<app-api-key-modal *ngIf="showApiKeyModal" (close)="closeApiKeyModal()"></app-api-key-modal>
+
+<!-- Dialogue Settings Modal -->
+<app-dialogue-settings-modal
+  [show]="showDialogueSettingsModal"
+  [selectedLanguage]="selectedLanguage"
+  [selectedScenario]="selectedConversationTheme"
+  (close)="closeDialogueSettingsModal()"
+  (startDialogue)="startNewDialogue($event)"
+></app-dialogue-settings-modal>

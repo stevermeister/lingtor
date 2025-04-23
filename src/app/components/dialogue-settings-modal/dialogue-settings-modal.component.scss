@@ -1,0 +1,154 @@
+@use "sass:color";
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background-color: var(--bg-primary, white);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color, #eee);
+  
+  h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--primary-text, #333);
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    color: var(--secondary-text, #666);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    
+    &:hover {
+      background-color: var(--bg-hover, #f5f5f5);
+    }
+  }
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.settings-section {
+  margin-bottom: 24px;
+  
+  h3 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--primary-text, #333);
+  }
+}
+
+.language-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  
+  .language-button {
+    background-color: var(--bg-control, #f5f5f5);
+    border: 1px solid var(--border-color, #eee);
+    color: var(--primary-text, #333);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: var(--bg-hover, #eaeaea);
+    }
+    
+    &.active {
+      background-color: var(--accent-color, #FF5733);
+      color: white;
+      border-color: var(--accent-color, #FF5733);
+    }
+  }
+}
+
+.scenario-dropdown {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #ddd);
+  background-color: var(--bg-control, #f5f5f5);
+  font-size: 14px;
+  color: var(--primary-text, #333);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-color, #eee);
+  
+  button {
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .cancel-button {
+    background-color: var(--bg-control, #f5f5f5);
+    border: 1px solid var(--border-color, #ddd);
+    color: var(--primary-text, #333);
+    
+    &:hover {
+      background-color: var(--bg-hover, #eaeaea);
+    }
+  }
+  
+  .start-button {
+    background-color: var(--accent-color, #FF5733);
+    border: 1px solid var(--accent-color, #FF5733);
+    color: white;
+    
+    &:hover {
+      background-color: color.adjust(#FF5733, $lightness: -5%);
+    }
+    
+    svg {
+      stroke: currentColor;
+    }
+  }
+}

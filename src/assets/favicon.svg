@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="32" cy="32" r="30" fill="#FF5733" />
+  
+  <!-- Chat Bubble Outlines -->
+  <path d="M18 20C18 18.8954 18.8954 18 20 18H34C35.1046 18 36 18.8954 36 20V28C36 29.1046 35.1046 30 34 30H24L18 36V20Z" fill="white" />
+  <path d="M28 34C28 32.8954 28.8954 32 30 32H44C45.1046 32 46 32.8954 46 34V42C46 43.1046 45.1046 44 44 44H40L34 50V44H30C28.8954 44 28 43.1046 28 42V34Z" fill="white" />
+  
+  <!-- Text/Lines in Chat Bubbles -->
+  <line x1="22" y1="22" x2="32" y2="22" stroke="#FF5733" stroke-width="2" stroke-linecap="round" />
+  <line x1="22" y1="26" x2="30" y2="26" stroke="#FF5733" stroke-width="2" stroke-linecap="round" />
+  
+  <line x1="32" y1="36" x2="42" y2="36" stroke="#FF5733" stroke-width="2" stroke-linecap="round" />
+  <line x1="32" y1="40" x2="40" y2="40" stroke="#FF5733" stroke-width="2" stroke-linecap="round" />
+</svg>

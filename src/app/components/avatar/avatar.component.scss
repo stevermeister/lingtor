@@ -1,0 +1,45 @@
+.avatar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--bg-control);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0; /* Prevent avatar from shrinking */
+  
+  &.avatar-user {
+    background-color: rgba(255, 87, 51, 0.05);
+  }
+  
+  &.avatar-role {
+    background-color: rgba(52, 199, 89, 0.05);
+  }
+  
+  .avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+  }
+  
+  // Size variants - fixed dimensions
+  &.avatar-size-small {
+    width: 32px;
+    height: 32px;
+    min-width: 32px; /* Fixed width */
+  }
+  
+  &.avatar-size-medium {
+    width: 40px;
+    height: 40px;
+    min-width: 40px; /* Fixed width */
+  }
+  
+  &.avatar-size-large {
+    width: 48px;
+    height: 48px;
+    min-width: 48px; /* Fixed width */
+  }
+}

@@ -1,0 +1,40 @@
+<div class="chat-container">
+  <div class="chat-messages" #chatMessagesContainer>
+    <!-- Message List -->
+    <div class="message-item" *ngFor="let message of messages">
+      
+      <!-- User Message -->
+      <div *ngIf="message.sender === 'user'" class="user-message-row">
+        <div class="message-content">
+          <div class="chat-bubble user-bubble">{{ message.content }}</div>
+        </div>
+        <div class="avatar-container">
+          <app-avatar avatarType="user" size="medium"></app-avatar>
+        </div>
+      </div>
+      
+      <!-- Bot Message -->
+      <div *ngIf="message.sender === 'bot'" class="bot-message-row">
+        <div class="avatar-container">
+          <app-avatar avatarType="role" [roleIcon]="currentRoleIcon" size="medium"></app-avatar>
+        </div>
+        <div class="message-content">
+          <div class="sender-name">{{ currentRoleName }}</div>
+          <div class="chat-bubble bot-bubble">{{ message.content }}</div>
+        </div>
+      </div>
+      
+      <!-- System Message -->
+      <div *ngIf="message.sender === 'system'" class="system-message-row">
+        <div class="system-bubble" [class.loading]="message.isLoading">
+          {{ message.content }}
+          <span *ngIf="message.isLoading" class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- Message Input Component -->
+  <app-message-input (sendMessage)="sendMessage($event)"></app-message-input>
+</div>
