@@ -1,59 +1,92 @@
-# AngularApp
+# Lingtor Language Chat 🗣️
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
+Lingtor is an immersive language learning application that simulates realistic conversations in various scenarios and languages, built with Angular 19.0.0.
 
-## Development server
+## Overview 🌟
 
-To start a local development server, run:
+Lingtor provides authentic conversation practice with contextual feedback in a variety of everyday situations. The application creates an immersive environment by:
+- Enforcing target language use only
+- Offering realistic scenarios with role-appropriate responses
+- Providing a low-pressure environment to practice conversation skills
+- Being available 24/7 for practice, unlike human language partners
+
+## Features 🚀
+
+### Core Features
+- **Language Selection**: Support for multiple languages (English, Spanish, German, Dutch)
+- **Conversation Scenarios**: 20+ predefined conversation scenarios in common situations
+- **Character-Based Dialogues**: AI-powered conversation partners with defined roles
+- **Modern Chat Interface**: Real-time message exchange with visual indicators
+- **Language Immersion**: Frontend language validation to maintain target language use
+- **Settings Management**: API key management for OpenAI integration
+
+### Target Audience
+- Language learners (beginner to advanced)
+- Students preparing for travel or work in foreign countries
+- Educators seeking interactive tools for language instruction
+- Self-learners looking for conversation practice
+
+## Technical Details 🛠️
+
+- **Framework**: Angular 19.0.0
+- **Styling**: SCSS with responsive design
+- **State Management**: Angular services with RxJS observables
+- **API Integration**: OpenAI API for language generation
+- **Deployment**: Static site hosting on Netlify
+
+## Development 👨‍💻
+
+### Setup
+
+1. Clone the repository
+2. Install dependencies:
+```bash
+npm install
+```
+3. Start development server:
+```bash
+npm start
+```
+4. Navigate to `http://localhost:4200/`
+
+### Folder Structure
+- `src/app/components/` - Angular standalone components
+- `src/app/services/` - Application services
+- `src/app/models/` - Data models and interfaces
+- `stories/` - User stories and requirements
+
+### Code Generation
+
+Generate new standalone components:
 
 ```bash
-ng serve
+ng generate component components/component-name --standalone
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Building for Production
 
 ```bash
-ng generate component component-name
+npm run build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+This will compile your project and store the build artifacts in the `dist/` directory.
+
+## Testing 🧪
+
+### Running Unit Tests
 
 ```bash
-ng generate --help
+npm test
 ```
 
-## Building
+Unit tests are written to ensure 100% coverage for methods and functions.
 
-To build the project run:
+## User Stories 📚
 
-```bash
-ng build
-```
+The application is built based on user stories located in the `stories/` directory. Each story follows standard format with ID, title, description, acceptance criteria, technical notes, priority, and story point estimation.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Additional Resources 📚
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Angular Documentation](https://angular.dev)
+- [OpenAI API Documentation](https://platform.openai.com/docs/api-reference)
+- [Netlify Deployment Guides](https://docs.netlify.com/)
